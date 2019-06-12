@@ -1,0 +1,38 @@
+//method1 剑指上的算法
+
+public boolean duplicate(int numbers[],int length,int [] duplication) {
+        int temp;
+        if(length<=1) return false;
+        
+        for(int i=0; i<length; i++){
+            while(numbers[i] != i){
+                if(numbers[i] != numbers[numbers[i]]){
+                    temp = numbers[i];
+                    numbers[i] = numbers[temp];
+                    numbers[temp] = temp;
+                }
+                else{
+                    duplication[0] = numbers[i];
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    
+//method 2 想用hashmap，牛客网上并不支持，手动构建hash
+ public boolean duplicate(int numbers[],int length,int [] duplication) {
+        if(length<=1) return false;
+        int[] hash = new int[length];
+        for(int i=0; i<numbers.length; i++){
+            hash[numbers[i]]++;
+        }
+        for(int i=0; i<numbers.length; i++){
+            if(hash[i]>1){
+                duplication[0]=i;
+                return true;
+            }
+        }
+        return false;
+    }
