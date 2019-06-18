@@ -1,0 +1,32 @@
+//method 1  不要求相对位置
+public class Solution {
+    public void reOrderArray(int [] array) {
+        if(array.length<2) return;
+        int left=0, right=array.length-1;
+        while(left<right){
+            while(left<right && array[left]%2==1)
+                left++;
+            while(left<right && array[right]%2==0)
+                right--;
+            if(left<right){
+                int temp = array[left];
+                array[left] = array[right];
+                array[right] = temp;
+            }
+        }
+    }
+    
+    //method 2 要求相对位置
+    public class Solution {
+    public void reOrderArray(int [] array) {
+       for(int i= 0;i<array.length-1;i++){
+            for(int j=0;j<array.length-1-i;j++){
+                if(array[j]%2==0&&array[j+1]%2==1){
+                    int t = array[j];
+                    array[j]=array[j+1];
+                    array[j+1]=t;
+                }
+            }
+        }
+    }
+}
