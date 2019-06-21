@@ -32,3 +32,111 @@ public class Solution {
         return result;
     }
 }
+
+
+//2 分行打印二叉树
+import java.util.ArrayList;
+import java.util.*;
+
+/*
+public class TreeNode {
+    int val = 0;
+    TreeNode left = null;
+    TreeNode right = null;
+
+    public TreeNode(int val) {
+        this.val = val;
+
+    }
+
+}
+*/
+public class Solution {
+    ArrayList<ArrayList<Integer> > Print(TreeNode pRoot) {
+        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+        ArrayList<Integer> temp = new ArrayList<Integer>();
+        LinkedList<TreeNode> q = new LinkedList<TreeNode>();
+        if(pRoot == null)
+            return result;
+        q.add(pRoot);
+        int now=1, next=0;
+        while(!q.isEmpty()){
+            TreeNode t = q.remove();
+            now--;
+            temp.add(t.val);
+            if(t.left!=null){
+                q.add(t.left);
+                next++;
+            }
+            if(t.right!=null){
+                q.add(t.right);
+                next++;
+            }
+            if(now==0){
+                result.add(new ArrayList<Integer>(temp));
+                temp.clear();
+                now=next;
+                next=0;
+            }
+        }
+        return result;
+    }
+    
+}
+
+//3之字形
+
+import java.util.ArrayList;
+import java.util.Stack;
+/*
+public class TreeNode {
+    int val = 0;
+    TreeNode left = null;
+    TreeNode right = null;
+
+    public TreeNode(int val) {
+        this.val = val;
+
+    }
+
+}
+*/
+public class Solution {
+    public ArrayList<ArrayList<Integer> > Print(TreeNode pRoot) {
+        
+        Stack<TreeNode> stack1 = new Stack<TreeNode>(); //奇数
+        Stack<TreeNode> stack2 = new Stack<TreeNode>(); //偶数
+        stack1.push(pRoot);
+        ArrayList<ArrayList<Integer>> list = new ArrayList<ArrayList<Integer>>();
+        if(pRoot==null)
+            return list;
+        
+        while(!stack1.isEmpty() || !stack2.isEmpty()){
+            if(!stack1.isEmpty()){
+                ArrayList<Integer> list2 = new ArrayList<Integer>();
+                while(!stack1.isEmpty()){
+                    TreeNode p =stack1.pop();
+                    list2.add(p.val);
+                    if(p.left!=null)
+                        stack2.push(p.left);
+                    if(p.right!=null)
+                        stack2.push(p.right);
+                }
+            list.add(list2);
+            }
+            else {
+                   ArrayList<Integer> list2=new ArrayList<Integer>();
+                   while(!stack2.isEmpty()){
+                       TreeNode p=stack2.pop();
+                   if(p.right!=null)
+                       stack1.push(p.right);
+                   if(p.left!=null)
+                       stack1.push(p.left);
+                   list2.add(p.val);
+                   }
+                list.add(list2);
+            }
+            }
+        return list;
+    }
+}
