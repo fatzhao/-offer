@@ -1,0 +1,19 @@
+public class Solution {
+    public int GetUglyNumber_Solution(int index) { 
+        if(index<=0) return 0;
+        int p2=0, p3=0, p5=0;
+        int count=0;
+        int[] result = new int[index];
+        result[0] = 1;
+        int min=0;
+        while(count<index-1){
+            min = Math.min(result[p2]*2, Math.min(result[p3]*3,result[p5]*5));
+            if(min==result[p2]*2) p2++;
+            if(min==result[p3]*3) p3++;
+            if(min==result[p5]*5) p5++;
+            count++;
+            result[count] = min;
+        }
+        return result[index-1];
+    }
+}
