@@ -1,0 +1,17 @@
+public class Solution {
+    public int NumberOf1Between1AndN_Solution(int n) {
+        int number = 0;
+        for(int i=1; i<=n; i++){
+            int temp = 0;
+            int num = i;
+            while(num!=0){
+                if(num%10 == 1)
+                    temp++;
+                num = num/10;
+            }
+            number += temp;
+        }
+        return number;
+    }
+}
+
